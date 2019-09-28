@@ -1,0 +1,25 @@
+[package]
+name = "codegenrs"
+version = "0.1.0"
+authors = ["Ed Page <eopage@gmail.com>"]
+description = "Moving code-gen our of build.rs"
+repository = "https://github.com/crate-ci/codegenrs"
+documentation = "https://docs.rs/codegenres"
+readme = "README.md"
+categories = ["development-tools", "text-processing"]
+keywords = ["development", "codegen"]
+license = "MIT OR Apache-2.0"
+edition = "2018"
+
+[badges]
+azure-devops = { project = "crate-ci", pipeline = "codegenrs" }
+codecov = { repository = "crate-ci/codegenrs" }
+
+[features]
+default = ["structopt"]
+
+[dependencies]
+difference = "2.0.0"
+structopt = { version = "0.3", optional = true }
+normalize-line-endings = "0.3.0"
+derive_more = "0.15.0"
