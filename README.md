@@ -2,7 +2,7 @@
 
 > **Moving code-gen our of `build.rs`**
 
-[![Build Status](https://dev.azure.com/crate-ci/crate-ci/_apis/build/status/codegenrs?branchName=master)](https://dev.azure.com/crate-ci/crate-ci/_build/latest?definitionId=7&branchName=master)
+[![Build Status](https://dev.azure.com/crate-ci/crate-ci/_apis/build/status/codegenrs?branchName=master)](https://dev.azure.com/crate-ci/crate-ci/_build/latest?definitionId=10&branchName=master)
 [![codecov](https://codecov.io/gh/crate-ci/codegenrs/branch/master/graph/badge.svg)](https://codecov.io/gh/crate-ci/codegenrs)
 [![Documentation](https://img.shields.io/badge/docs-master-blue.svg)][Documentation]
 ![License](https://img.shields.io/crates/l/codegenrs.svg)
