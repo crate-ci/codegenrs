@@ -57,7 +57,7 @@ pub struct CodeGenArgs {
 #[cfg(feature = "structopt")]
 impl CodeGenArgs {
     /// Write or verify code-genned text.
-    fn write_str(&self, content: &str) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn write_str(&self, content: &str) -> Result<(), Box<dyn std::error::Error>> {
         write_str(content, &self.output, self.check)
     }
 }
