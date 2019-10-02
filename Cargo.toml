@@ -1,6 +1,6 @@
 [package]
 name = "codegenrs"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Ed Page <eopage@gmail.com>"]
 description = "Moving code-gen our of build.rs"
 repository = "https://github.com/crate-ci/codegenrs"
