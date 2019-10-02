@@ -1,6 +1,6 @@
 //! # codegenrs
 //!
-//! > **Nitpicking commit history since `beabf39`**
+//! > **Moving code-gen our of `build.rs`**
 //!
 //! ## About
 //!
@@ -27,7 +27,7 @@
 use std::io::Write;
 use std::iter::FromIterator;
 
-#[cfg(features = "structopt")]
+#[cfg(feature = "structopt")]
 use structopt::StructOpt;
 
 /// CLI arguments to `flatten` into your args
@@ -35,15 +35,15 @@ use structopt::StructOpt;
 /// ## Example
 ///
 /// ```rust
-/// #[structopt::StructOpt]
+/// #[derive(structopt::StructOpt)]
 /// struct Args{
 ///    #[structopt(short("-o"), long, parse(from_os_str))]
 ///    output: std::path::PathBuf,
 ///    #[structopt(flatten)]
-///    codegen: codegeners::CodeGenArgs,
+///    codegen: codegenrs::CodeGenArgs,
 /// }
 /// ```
-#[cfg(features = "structopt")]
+#[cfg(feature = "structopt")]
 #[derive(Debug, StructOpt)]
 #[structopt(rename_all = "kebab-case")]
 pub struct CodeGenArgs {
