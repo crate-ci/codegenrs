@@ -37,8 +37,8 @@ use structopt::StructOpt;
 /// ```rust
 /// #[derive(structopt::StructOpt)]
 /// struct Args{
-///    #[structopt(short("-o"), long, parse(from_os_str))]
-///    output: std::path::PathBuf,
+///    #[structopt(short("-i"), long, parse(from_os_str))]
+///    input: std::path::PathBuf,
 ///    #[structopt(flatten)]
 ///    codegen: codegenrs::CodeGenArgs,
 /// }
@@ -89,6 +89,59 @@ pub fn write_str(
     }
 
     Ok(())
+}
+
+/// CLI arguments to `flatten` into your args
+///
+/// ## Example
+///
+/// ```rust
+/// #[derive(structopt::StructOpt)]
+/// struct Args{
+///    #[structopt(short("-i"), long, parse(from_os_str))]
+///    input: std::path::PathBuf,
+///    #[structopt(flatten)]
+///    codegen: codegenrs::CodeGenArgs,
+///    #[structopt(flatten)]
+///    rustfmt: codegenrs::RustfmtArgs,
+/// }
+/// ```
+#[cfg(feature = "structopt")]
+#[derive(Debug, StructOpt)]
+#[structopt(rename_all = "kebab-case")]
+pub struct RustfmtArgs {
+    #[structopt(long, parse(from_os_str))]
+    rustfmt_config: Option<std::path::PathBuf>,
+}
+
+#[cfg(feature = "structopt")]
+impl RustfmtArgs {
+    /// Write or verify code-genned text.
+    pub fn reformat(
+        &self,
+        text: impl std::fmt::Display,
+    ) -> Result<String, Box<dyn std::error::Error>> {
+        rustfmt(text, self.rustfmt_config.as_ref().map(|p| p.as_path()))
+    }
+}
+
+/// Run `rustfmt` on an in-memory string
+pub fn rustfmt(
+    text: impl std::fmt::Display,
+    config: Option<&std::path::Path>,
+) -> Result<String, Box<dyn std::error::Error>> {
+    let mut rustfmt = std::process::Command::new("rustfmt");
+    rustfmt
+        .stdin(std::process::Stdio::piped())
+        .stdout(std::process::Stdio::piped());
+    if let Some(config) = config {
+        rustfmt.arg("--config-path").arg(config);
+    }
+    let mut rustfmt = rustfmt.spawn()?;
+    write!(rustfmt.stdin.take().unwrap(), "{}", text)?;
+    let output = rustfmt.wait_with_output()?;
+    let stdout = String::from_utf8(output.stdout)?;
+    Ok(stdout)
 }
 
 #[derive(Copy, Clone, Debug, derive_more::Display)]
