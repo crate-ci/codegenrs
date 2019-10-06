@@ -76,12 +76,21 @@ pub fn write_str(
         let actual = std::fs::read_to_string(output)?;
         let actual = String::from_iter(normalize_line_endings::normalized(actual.chars()));
 
-        let changeset = difference::Changeset::new(&actual, &content, "\n");
-        if changeset.distance != 0 {
-            eprintln!("{}", changeset);
-            return Err(Box::new(CodeGenError));
-        } else {
+        if content == actual {
             println!("Success");
+        } else {
+            // `difference` will allocation a `Vec` with  N*M elements.
+            let allocation = content.lines().count() * actual.lines().count();
+            if 1_000_000_000 < allocation {
+                eprintln!("{} out of sync (too big to diff)", output.display());
+                return Err(Box::new(CodeGenError));
+            } else {
+                let changeset = difference::Changeset::new(&actual, &content, "\n");
+                assert_ne!(changeset.distance, 0);
+                eprintln!("{} out of sync:", output.display());
+                eprintln!("{}", changeset);
+                return Err(Box::new(CodeGenError));
+            }
         }
     } else {
         let mut file = std::io::BufWriter::new(std::fs::File::create(output)?);
