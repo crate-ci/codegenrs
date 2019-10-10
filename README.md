@@ -1,6 +1,6 @@
 # codegenrs
 
-> **Moving code-gen our of `build.rs`**
+> **Moving code-gen out of our `build.rs`**
 
 [![Build Status](https://dev.azure.com/crate-ci/crate-ci/_apis/build/status/codegenrs?branchName=master)](https://dev.azure.com/crate-ci/crate-ci/_build/latest?definitionId=10&branchName=master)
 [![codecov](https://codecov.io/gh/crate-ci/codegenrs/branch/master/graph/badge.svg)](https://codecov.io/gh/crate-ci/codegenrs)
