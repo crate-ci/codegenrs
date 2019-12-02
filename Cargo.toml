@@ -22,4 +22,4 @@ default = ["structopt"]
 difference = "2.0.0"
 structopt = { version = "0.3", optional = true }
 normalize-line-endings = "0.3.0"
-derive_more = "0.15.0"
+derive_more = "0.99.2"
