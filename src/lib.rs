@@ -124,7 +124,7 @@ impl RustfmtArgs {
         &self,
         text: impl std::fmt::Display,
     ) -> Result<String, Box<dyn std::error::Error>> {
-        rustfmt(text, self.rustfmt_config.as_ref().map(|p| p.as_path()))
+        rustfmt(text, self.rustfmt_config.as_deref())
     }
 }
 
