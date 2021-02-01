@@ -14,6 +14,7 @@ edition = "2018"
 [badges]
 azure-devops = { project = "crate-ci", pipeline = "codegenrs" }
 codecov = { repository = "crate-ci/codegenrs" }
+maintenance = { status = "passively-maintained" }
 
 [features]
 default = ["structopt"]

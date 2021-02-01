@@ -13,12 +13,6 @@
 //!
 //!## Usage
 //!
-//!```toml
-//![dependencies]
-//!codegenners = "0.1"
-//!structopt = "0.3"
-//!```
-//!
 //!`imperative` example:
 //! - output: [`wordlist_codegen.rs`](https://github.com/crate-ci/imperative/blob/master/src/wordlist_codegen.rs)
 //! - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/codegen)
