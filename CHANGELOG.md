@@ -11,5 +11,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/assert-rs/predicates-rs/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/assert-rs/predicates-rs/compare/v0.1.5...v1.0.0
+[Unreleased]: https://github.com/crate-ci/codegenrs/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/crate-ci/codegenrs/compare/v0.1.5...v1.0.0
