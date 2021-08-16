@@ -1,20 +1,28 @@
 [package]
 name = "codegenrs"
 version = "1.0.0"
-authors = ["Ed Page <eopage@gmail.com>"]
 description = "Moving code-gen our of build.rs"
+authors = ["Ed Page <eopage@gmail.com>"]
+license = "MIT OR Apache-2.0"
 repository = "https://github.com/crate-ci/codegenrs"
 documentation = "https://docs.rs/codegenres"
 readme = "README.md"
 categories = ["development-tools", "text-processing"]
 keywords = ["development", "codegen"]
-license = "MIT OR Apache-2.0"
 edition = "2018"
 
 [badges]
-azure-devops = { project = "crate-ci", pipeline = "codegenrs" }
 codecov = { repository = "crate-ci/codegenrs" }
 maintenance = { status = "passively-maintained" }
+
+[package.metadata.release]
+pre-release-replacements = [
+  {file="CHANGELOG.md", search="Unreleased", replace="{{version}}", min=1},
+  {file="CHANGELOG.md", search="\\.\\.\\.HEAD", replace="...{{tag_name}}", exactly=1},
+  {file="CHANGELOG.md", search="ReleaseDate", replace="{{date}}", min=1},
+  {file="CHANGELOG.md", search="<!-- next-header -->", replace="<!-- next-header -->\n## [Unreleased] - ReleaseDate\n", exactly=1},
+  {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[Unreleased]: https://github.com/crate-ci/codegenrs/compare/{{tag_name}}...HEAD", exactly=1},
+]
 
 [features]
 default = ["structopt"]
