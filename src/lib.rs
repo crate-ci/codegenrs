@@ -21,34 +21,33 @@
 use std::io::Write;
 use std::iter::FromIterator;
 
-#[cfg(feature = "structopt")]
-use structopt::StructOpt;
+#[cfg(feature = "clap")]
+use clap::Args;
 
 /// CLI arguments to `flatten` into your args
 ///
 /// ## Example
 ///
 /// ```rust
-/// #[derive(structopt::StructOpt)]
+/// #[derive(clap::Parser)]
 /// struct Args{
-///    #[structopt(short("-i"), long, parse(from_os_str))]
+///    #[clap(short('i'), long, parse(from_os_str))]
 ///    input: std::path::PathBuf,
-///    #[structopt(flatten)]
+///    #[clap(flatten)]
 ///    codegen: codegenrs::CodeGenArgs,
 /// }
 /// ```
-#[cfg(feature = "structopt")]
-#[derive(Debug, StructOpt)]
-#[structopt(rename_all = "kebab-case")]
+#[cfg(feature = "clap")]
+#[derive(Debug, Args)]
 pub struct CodeGenArgs {
-    #[structopt(short("-o"), long, parse(from_os_str))]
+    #[clap(short('o'), long, parse(from_os_str))]
     output: std::path::PathBuf,
 
-    #[structopt(long)]
+    #[clap(long)]
     check: bool,
 }
 
-#[cfg(feature = "structopt")]
+#[cfg(feature = "clap")]
 impl CodeGenArgs {
     /// Write or verify code-genned text.
     pub fn write_str(&self, content: &str) -> Result<(), Box<dyn std::error::Error>> {
@@ -58,7 +57,7 @@ impl CodeGenArgs {
 
 /// Write or verify code-genned text.
 ///
-/// See `CodeGenArgs` for `structopt` integration.
+/// See `CodeGenArgs` for `clap` integration.
 pub fn write_str(
     content: &str,
     output: &std::path::Path,
@@ -99,25 +98,24 @@ pub fn write_str(
 /// ## Example
 ///
 /// ```rust
-/// #[derive(structopt::StructOpt)]
+/// #[derive(clap::Parser)]
 /// struct Args{
-///    #[structopt(short("-i"), long, parse(from_os_str))]
+///    #[clap(short('i'), long, parse(from_os_str))]
 ///    input: std::path::PathBuf,
-///    #[structopt(flatten)]
+///    #[clap(flatten)]
 ///    codegen: codegenrs::CodeGenArgs,
-///    #[structopt(flatten)]
+///    #[clap(flatten)]
 ///    rustfmt: codegenrs::RustfmtArgs,
 /// }
 /// ```
-#[cfg(feature = "structopt")]
-#[derive(Debug, StructOpt)]
-#[structopt(rename_all = "kebab-case")]
+#[cfg(feature = "clap")]
+#[derive(Debug, Args)]
 pub struct RustfmtArgs {
-    #[structopt(long, parse(from_os_str))]
+    #[clap(long, parse(from_os_str))]
     rustfmt_config: Option<std::path::PathBuf>,
 }
 
-#[cfg(feature = "structopt")]
+#[cfg(feature = "clap")]
 impl RustfmtArgs {
     /// Write or verify code-genned text.
     pub fn reformat(
