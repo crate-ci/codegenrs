@@ -18,37 +18,37 @@
 //! - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/codegen)
 //! - audit: [`azure-pipelines.yml`](https://github.com/crate-ci/imperative/blob/master/azure-pipelines.yml#L13)
 
-use std::io::Write;
-use std::iter::FromIterator;
+#![allow(clippy::branches_sharing_code)]
 
-#[cfg(feature = "structopt")]
-use structopt::StructOpt;
+use std::io::Write;
+
+#[cfg(feature = "clap")]
+use clap::Args;
 
 /// CLI arguments to `flatten` into your args
 ///
 /// ## Example
 ///
 /// ```rust
-/// #[derive(structopt::StructOpt)]
+/// #[derive(clap::Parser)]
 /// struct Args{
-///    #[structopt(short("-i"), long, parse(from_os_str))]
+///    #[clap(short('i'), long, parse(from_os_str))]
 ///    input: std::path::PathBuf,
-///    #[structopt(flatten)]
+///    #[clap(flatten)]
 ///    codegen: codegenrs::CodeGenArgs,
 /// }
 /// ```
-#[cfg(feature = "structopt")]
-#[derive(Debug, StructOpt)]
-#[structopt(rename_all = "kebab-case")]
+#[cfg(feature = "clap")]
+#[derive(Debug, Args)]
 pub struct CodeGenArgs {
-    #[structopt(short("-o"), long, parse(from_os_str))]
+    #[clap(short('o'), long, parse(from_os_str))]
     output: std::path::PathBuf,
 
-    #[structopt(long)]
+    #[clap(long)]
     check: bool,
 }
 
-#[cfg(feature = "structopt")]
+#[cfg(feature = "clap")]
 impl CodeGenArgs {
     /// Write or verify code-genned text.
     pub fn write_str(&self, content: &str) -> Result<(), Box<dyn std::error::Error>> {
@@ -58,17 +58,17 @@ impl CodeGenArgs {
 
 /// Write or verify code-genned text.
 ///
-/// See `CodeGenArgs` for `structopt` integration.
+/// See `CodeGenArgs` for `clap` integration.
 pub fn write_str(
     content: &str,
     output: &std::path::Path,
     check: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
     if check {
-        let content = String::from_iter(normalize_line_endings::normalized(content.chars()));
+        let content: String = normalize_line_endings::normalized(content.chars()).collect();
 
         let actual = std::fs::read_to_string(output)?;
-        let actual = String::from_iter(normalize_line_endings::normalized(actual.chars()));
+        let actual: String = normalize_line_endings::normalized(actual.chars()).collect();
 
         if content == actual {
             println!("Success");
@@ -99,25 +99,24 @@ pub fn write_str(
 /// ## Example
 ///
 /// ```rust
-/// #[derive(structopt::StructOpt)]
+/// #[derive(clap::Parser)]
 /// struct Args{
-///    #[structopt(short("-i"), long, parse(from_os_str))]
+///    #[clap(short('i'), long, parse(from_os_str))]
 ///    input: std::path::PathBuf,
-///    #[structopt(flatten)]
+///    #[clap(flatten)]
 ///    codegen: codegenrs::CodeGenArgs,
-///    #[structopt(flatten)]
+///    #[clap(flatten)]
 ///    rustfmt: codegenrs::RustfmtArgs,
 /// }
 /// ```
-#[cfg(feature = "structopt")]
-#[derive(Debug, StructOpt)]
-#[structopt(rename_all = "kebab-case")]
+#[cfg(feature = "clap")]
+#[derive(Debug, Args)]
 pub struct RustfmtArgs {
-    #[structopt(long, parse(from_os_str))]
+    #[clap(long, parse(from_os_str))]
     rustfmt_config: Option<std::path::PathBuf>,
 }
 
-#[cfg(feature = "structopt")]
+#[cfg(feature = "clap")]
 impl RustfmtArgs {
     /// Write or verify code-genned text.
     pub fn reformat(
