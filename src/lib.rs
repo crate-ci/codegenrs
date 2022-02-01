@@ -18,8 +18,9 @@
 //! - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/codegen)
 //! - audit: [`azure-pipelines.yml`](https://github.com/crate-ci/imperative/blob/master/azure-pipelines.yml#L13)
 
+#![allow(clippy::branches_sharing_code)]
+
 use std::io::Write;
-use std::iter::FromIterator;
 
 #[cfg(feature = "clap")]
 use clap::Args;
@@ -64,10 +65,10 @@ pub fn write_str(
     check: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
     if check {
-        let content = String::from_iter(normalize_line_endings::normalized(content.chars()));
+        let content: String = normalize_line_endings::normalized(content.chars()).collect();
 
         let actual = std::fs::read_to_string(output)?;
-        let actual = String::from_iter(normalize_line_endings::normalized(actual.chars()));
+        let actual: String = normalize_line_endings::normalized(actual.chars()).collect();
 
         if content == actual {
             println!("Success");
