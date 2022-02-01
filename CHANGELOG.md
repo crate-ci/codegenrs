@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Fixes
+
+Upgrade from structopt to clap3
+
 ## [1.0.0] - 2021-02-01
 
 
