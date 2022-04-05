@@ -1,7 +1,7 @@
 # These settings are synced to GitHub by https://probot.github.io/apps/settings/
 
 repository:
-  description: Moving code-gen our of `build.rs` 
+  description: Moving code-gen out of `build.rs` 
   homepage: docs.rs/codegenrs
   topics: rust build codegen
   has_issues: true
