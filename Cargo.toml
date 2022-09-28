@@ -32,6 +32,6 @@ default = ["clap"]
 
 [dependencies]
 difference = "2.0.0"
-clap = { version = "3.0", features = ["derive"], optional = true }
+clap = { version = "4.0.0", features = ["std", "derive"], optional = true }
 normalize-line-endings = "0.3.0"
 derive_more = "0.99.2"
