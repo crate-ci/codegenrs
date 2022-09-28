@@ -9,7 +9,8 @@ documentation = "https://docs.rs/codegenres"
 readme = "README.md"
 categories = ["development-tools", "text-processing"]
 keywords = ["development", "codegen"]
-edition = "2018"
+edition = "2021"
+rust-version = "1.60.0"  # MSRV
 include = [
   "src/**/*",
   "Cargo.toml",
@@ -32,6 +33,6 @@ default = ["clap"]
 
 [dependencies]
 difference = "2.0.0"
-clap = { version = "3.0", features = ["derive"], optional = true }
+clap = { version = "4.0.0", features = ["std", "derive"], optional = true }
 normalize-line-endings = "0.3.0"
 derive_more = "0.99.2"

@@ -32,19 +32,19 @@ use clap::Args;
 /// ```rust
 /// #[derive(clap::Parser)]
 /// struct Args{
-///    #[clap(short('i'), long, parse(from_os_str))]
+///    #[arg(short('i'), long)]
 ///    input: std::path::PathBuf,
-///    #[clap(flatten)]
+///    #[command(flatten)]
 ///    codegen: codegenrs::CodeGenArgs,
 /// }
 /// ```
 #[cfg(feature = "clap")]
 #[derive(Debug, Args)]
 pub struct CodeGenArgs {
-    #[clap(short('o'), long, parse(from_os_str))]
+    #[arg(short('o'), long)]
     output: std::path::PathBuf,
 
-    #[clap(long)]
+    #[arg(long)]
     check: bool,
 }
 
@@ -101,18 +101,18 @@ pub fn write_str(
 /// ```rust
 /// #[derive(clap::Parser)]
 /// struct Args{
-///    #[clap(short('i'), long, parse(from_os_str))]
+///    #[arg(short('i'), long)]
 ///    input: std::path::PathBuf,
-///    #[clap(flatten)]
+///    #[command(flatten)]
 ///    codegen: codegenrs::CodeGenArgs,
-///    #[clap(flatten)]
+///    #[command(flatten)]
 ///    rustfmt: codegenrs::RustfmtArgs,
 /// }
 /// ```
 #[cfg(feature = "clap")]
 #[derive(Debug, Args)]
 pub struct RustfmtArgs {
-    #[clap(long, parse(from_os_str))]
+    #[arg(long)]
     rustfmt_config: Option<std::path::PathBuf>,
 }
 
