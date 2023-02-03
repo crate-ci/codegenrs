@@ -82,13 +82,13 @@ pub fn write_str(
                 let changeset = difference::Changeset::new(&actual, &content, "\n");
                 assert_ne!(changeset.distance, 0);
                 eprintln!("{} out of sync:", output.display());
-                eprintln!("{}", changeset);
+                eprintln!("{changeset}");
                 return Err(Box::new(CodeGenError));
             }
         }
     } else {
         let mut file = std::io::BufWriter::new(std::fs::File::create(output)?);
-        write!(file, "{}", content)?;
+        write!(file, "{content}")?;
     }
 
     Ok(())
@@ -140,7 +140,7 @@ pub fn rustfmt(
         rustfmt.arg("--config-path").arg(config);
     }
     let mut rustfmt = rustfmt.spawn()?;
-    write!(rustfmt.stdin.take().unwrap(), "{}", text)?;
+    write!(rustfmt.stdin.take().unwrap(), "{text}")?;
     let output = rustfmt.wait_with_output()?;
     let stdout = String::from_utf8(output.stdout)?;
     Ok(stdout)
