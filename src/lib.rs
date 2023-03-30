@@ -18,6 +18,7 @@
 //! - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/codegen)
 //! - audit: [`azure-pipelines.yml`](https://github.com/crate-ci/imperative/blob/master/azure-pipelines.yml#L13)
 
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![allow(clippy::branches_sharing_code)]
 
 use std::io::Write;
