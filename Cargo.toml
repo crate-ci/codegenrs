@@ -1,23 +1,39 @@
+[workspace]
+resolver = "2"
+
+[workspace.package]
+license = "MIT OR Apache-2.0"
+edition = "2021"
+rust-version = "1.65.0"  # MSRV
+include = [
+  "build.rs",
+  "src/**/*",
+  "Cargo.toml",
+  "Cargo.lock",
+  "LICENSE*",
+  "README.md",
+  "benches/**/*",
+  "examples/**/*"
+]
+
 [package]
 name = "codegenrs"
 version = "2.0.0"
 description = "Moving code-gen our of build.rs"
 authors = ["Ed Page <eopage@gmail.com>"]
-license = "MIT OR Apache-2.0"
 repository = "https://github.com/crate-ci/codegenrs"
 documentation = "https://docs.rs/codegenres"
 readme = "README.md"
 categories = ["development-tools", "text-processing"]
 keywords = ["development", "codegen"]
-edition = "2021"
-rust-version = "1.60.0"  # MSRV
-include = [
-  "src/**/*",
-  "Cargo.toml",
-  "LICENSE*",
-  "README.md",
-  "examples/**/*"
-]
+license.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+include.workspace = true
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
 
 [package.metadata.release]
 pre-release-replacements = [
