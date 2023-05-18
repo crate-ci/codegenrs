@@ -15,8 +15,7 @@
 //!
 //!`imperative` example:
 //! - output: [`wordlist_codegen.rs`](https://github.com/crate-ci/imperative/blob/master/src/wordlist_codegen.rs)
-//! - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/codegen)
-//! - audit: [`azure-pipelines.yml`](https://github.com/crate-ci/imperative/blob/master/azure-pipelines.yml#L13)
+//! - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/tests/codegen.rs)
 
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![allow(clippy::branches_sharing_code)]
