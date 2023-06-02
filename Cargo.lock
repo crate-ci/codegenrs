@@ -58,7 +58,7 @@ dependencies = [
 
 [[package]]
 name = "codegenrs"
-version = "2.0.0"
+version = "3.0.0"
 dependencies = [
  "clap",
  "derive_more",

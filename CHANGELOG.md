@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+## [3.0.0] - 2023-06-02
+
 ### Fixes
 
 Upgrade from clap3 to clap4
@@ -21,6 +23,7 @@ Upgrade from structopt to clap3
 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/crate-ci/codegenrs/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/crate-ci/codegenrs/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/crate-ci/codegenrs/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/crate-ci/codegenrs/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/crate-ci/codegenrs/compare/v0.1.5...v1.0.0
