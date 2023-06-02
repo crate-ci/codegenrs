@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Fixes
+
+Upgrade from clap3 to clap4
+
 ## [2.0.0] - 2022-02-01
 
 ### Fixes
