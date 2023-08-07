@@ -139,7 +139,9 @@ pub fn rustfmt(
     if let Some(config) = config {
         rustfmt.arg("--config-path").arg(config);
     }
-    let mut rustfmt = rustfmt.spawn()?;
+    let mut rustfmt = rustfmt
+        .spawn()
+        .map_err(|err| format!("could not run `rustfmt`: {err}"))?;
     write!(rustfmt.stdin.take().unwrap(), "{text}")?;
     let output = rustfmt.wait_with_output()?;
     let stdout = String::from_utf8(output.stdout)?;
