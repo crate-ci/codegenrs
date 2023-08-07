@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Fixes
+
+- Improve error on `rustfmt` missing
+
 ## [3.0.0] - 2023-06-02
 
 ### Fixes
