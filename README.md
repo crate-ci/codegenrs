@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/crate-ci/codegenrs/branch/master/graph/badge.svg)](https://codecov.io/gh/crate-ci/codegenrs)
 [![Documentation](https://img.shields.io/badge/docs-master-blue.svg)][Documentation]
 ![License](https://img.shields.io/crates/l/codegenrs.svg)
-[![Crates Status](https://img.shields.io/crates/v/codegenrs.svg)](https://crates.io/crates/codegenrs)
+[![Crates Status](https://img.shields.io/crates/v/codegenrs.svg)][Crates.io]
 
 ## About
 
@@ -29,8 +29,8 @@ This is done by:
 
 Licensed under either of
 
- * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
- * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+* Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
+* MIT license ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
 
 at your option.
 
