@@ -18,7 +18,9 @@
 //! - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/tests/codegen.rs)
 
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
-#![allow(clippy::branches_sharing_code)]
+#![warn(missing_docs)]
+#![warn(clippy::print_stderr)]
+#![warn(clippy::print_stdout)]
 
 use std::io::Write;
 
@@ -70,20 +72,19 @@ pub fn write_str(
         let actual = std::fs::read_to_string(output)?;
         let actual: String = normalize_line_endings::normalized(actual.chars()).collect();
 
-        if content == actual {
-            println!("Success");
-        } else {
+        if content != actual {
             // `difference` will allocation a `Vec` with  N*M elements.
             let allocation = content.lines().count() * actual.lines().count();
             if 1_000_000_000 < allocation {
-                eprintln!("{} out of sync (too big to diff)", output.display());
-                return Err(Box::new(CodeGenError));
+                return Err(Box::new(CodeGenError {
+                    message: format!("{} out of sync (too big to diff)", output.display()),
+                }));
             } else {
                 let changeset = difference::Changeset::new(&actual, &content, "\n");
                 assert_ne!(changeset.distance, 0);
-                eprintln!("{} out of sync:", output.display());
-                eprintln!("{changeset}");
-                return Err(Box::new(CodeGenError));
+                return Err(Box::new(CodeGenError {
+                    message: format!("{} out of sync:\n{changeset}", output.display()),
+                }));
             }
         }
     } else {
@@ -142,14 +143,27 @@ pub fn rustfmt(
     let mut rustfmt = rustfmt
         .spawn()
         .map_err(|err| format!("could not run `rustfmt`: {err}"))?;
-    write!(rustfmt.stdin.take().unwrap(), "{text}")?;
+    write!(
+        rustfmt
+            .stdin
+            .take()
+            .expect("rustfmt was configured with stdin"),
+        "{text}"
+    )?;
     let output = rustfmt.wait_with_output()?;
     let stdout = String::from_utf8(output.stdout)?;
     Ok(stdout)
 }
 
-#[derive(Copy, Clone, Debug, derive_more::Display)]
-#[display(fmt = "Code-gen failed")]
-struct CodeGenError;
+#[derive(Clone, Debug)]
+struct CodeGenError {
+    message: String,
+}
 
 impl std::error::Error for CodeGenError {}
+
+impl std::fmt::Display for CodeGenError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.message.fmt(f)
+    }
+}
