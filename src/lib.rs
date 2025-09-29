@@ -17,7 +17,7 @@
 //! - output: [`wordlist_codegen.rs`](https://github.com/crate-ci/imperative/blob/master/src/wordlist_codegen.rs)
 //! - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/tests/codegen.rs)
 
-#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 #![warn(clippy::print_stderr)]
 #![warn(clippy::print_stdout)]
 
