@@ -24,6 +24,10 @@ This is done by:
 - generator: [`imperative-codegen`](https://github.com/crate-ci/imperative/tree/master/tests/testsuite/codegen.rs)
 
 ## [Contribute](CONTRIBUTING.md)
+||||||| 824cc73
+[![Documentation](https://img.shields.io/badge/docs-master-blue.svg)][Documentation]
+![License](https://img.shields.io/crates/l/PROJECT.svg)
+[![Crates Status](https://img.shields.io/crates/v/PROJECT.svg)][Crates.io]
 
 ## License
 
